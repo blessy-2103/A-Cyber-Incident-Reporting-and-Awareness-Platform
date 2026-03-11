@@ -208,20 +208,33 @@ Cyber-Incident-Reporting-Platform
 
 ---
 
+## Incident Dashboard
 
-## Admin Dashboard
+<img width="1920" height="1080" alt="Screenshot (466)" src="https://github.com/user-attachments/assets/3bdeaa78-cffd-49e7-8611-cf09446aa572" />
 
-![Admin Dashboard](screenshots/admin_dashboard.png)
+---
+## Cyber Awareness Page
+<img width="1920" height="1080" alt="Screenshot (467)" src="https://github.com/user-attachments/assets/f5cbeaaf-c418-421c-87ef-46a59c83dbf4" />
+<img width="1920" height="1080" alt="Screenshot (468)" src="https://github.com/user-attachments/assets/3c18e27a-e1b1-46a7-8820-c2e63f90beb7" />
 
 ---
 
 ## Cybersecurity Chatbot
 
-![Chatbot](screenshots/chatbot.png)
+<img width="1920" height="1080" alt="Screenshot (469)" src="https://github.com/user-attachments/assets/14db8b11-1c25-4be0-93c9-448abbc0ed11" />
+
 
 ---
 
-# 🚀 Installation Guide
+## Admin Dashboard
+
+<img width="1920" height="1080" alt="Screenshot (470)" src="https://github.com/user-attachments/assets/109d8650-2c9f-41fd-9d2e-59e3e72de685" />
+<img width="1920" height="1080" alt="Screenshot (471)" src="https://github.com/user-attachments/assets/8639f611-4fa0-42e1-90ea-14e716450434" />
+
+
+---
+
+#  Installation 
 
 Clone the repository:
 
@@ -255,7 +268,7 @@ http://127.0.0.1:5000
 
 ---
 
-# 🔑 Default Admin Login
+#  Default Admin Login
 
 Email:
 
@@ -271,26 +284,5 @@ admin123
 
 ---
 
-# 🔮 Future Improvements
 
-Possible future enhancements:
 
-- Email alerts for critical incidents
-- File evidence upload
-- AI-based phishing detection
-- Real-time threat monitoring
-- Incident timeline tracking
-
----
-
-# 👨‍💻 Author
-
-Blessy Christrus
-
-Cybersecurity Student Project
-
----
-
-# 📄 License
-
-This project is developed for **educational and academic purposes**.
