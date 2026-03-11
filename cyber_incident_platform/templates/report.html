@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Report Cyber Incident</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f6fb;
+}
+
+/* HEADER */
+
+header{
+background:linear-gradient(135deg,#6a11cb,#9c27b0);
+color:white;
+padding:18px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+header h1{
+font-size:24px;
+}
+
+.home-btn{
+background:white;
+color:#7b2cbf;
+border:none;
+padding:8px 18px;
+border-radius:20px;
+cursor:pointer;
+}
+
+/* FORM */
+
+.container{
+display:flex;
+justify-content:center;
+padding-top:40px;
+}
+
+.form-card{
+background:white;
+width:500px;
+padding:35px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.form-card h2{
+text-align:center;
+margin-bottom:25px;
+color:#6a11cb;
+}
+
+.input-group{
+margin-bottom:15px;
+}
+
+.input-group label{
+font-weight:500;
+font-size:14px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+textarea{
+height:100px;
+resize:none;
+}
+
+.submit-btn{
+width:100%;
+padding:12px;
+border:none;
+border-radius:25px;
+background:linear-gradient(135deg,#6a11cb,#9c27b0);
+color:white;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.submit-btn:hover{
+transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>CYBER INCIDENT REPORTING PORTAL</h1>
+
+<a href="/">
+<button class="home-btn">HOME</button>
+</a>
+
+</header>
+
+<div class="container">
+
+<div class="form-card">
+
+<h2>SUBMIT INCIDENT REPORT</h2>
+
+<form method="POST" action="/report">
+
+<div class="input-group">
+<label>INCIDENT TYPE</label>
+<select name="incident_type" required>
+<option value="">Select</option>
+<option>Phishing</option>
+<option>Malware</option>
+<option>Ransomware</option>
+<option>Data Breach</option>
+<option>Unauthorized Access</option>
+<option>Others</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>INCIDENT TITLE</label>
+<input type="text" name="title" required>
+</div>
+
+<div class="input-group">
+<label>DATE OF INCIDENT</label>
+<input type="date" name="incident_date" required>
+</div>
+
+<div class="input-group">
+<label>SEVERITY LEVEL</label>
+<select name="severity" required>
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+<option>Critical</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>AFFECTED SYSTEM</label>
+<input type="text" name="affected_system" placeholder="Server, Email, Laptop etc">
+</div>
+
+<div class="input-group">
+<label>REPORTER NAME</label>
+<input type="text" name="reporter">
+</div>
+
+<div class="input-group">
+<label>DESCRIPTION</label>
+<textarea name="description" required></textarea>
+</div>
+
+<button class="submit-btn">SUBMIT REPORT</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>
