@@ -1,0 +1,83 @@
+body{
+font-family: Arial, sans-serif;
+margin:0;
+background:#f9f7ff;
+}
+
+header{
+background:#6b21a8;
+color:white;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+header h1{
+margin:0;
+}
+
+.container{
+padding:40px;
+display:flex;
+gap:30px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.card{
+background:white;
+padding:30px;
+width:260px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-align:center;
+border-top:5px solid #9333ea;
+}
+
+.btn{
+background:#9333ea;
+color:white;
+padding:10px 20px;
+text-decoration:none;
+border-radius:6px;
+display:inline-block;
+margin-top:10px;
+}
+
+.btn:hover{
+background:#7e22ce;
+}
+
+.form-box{
+width:350px;
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+border-top:5px solid rgb(237, 97, 237);
+}
+
+.center{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:10px;
+background:rgb(208, 97, 208);
+color:white;
+border:none;
+border-radius:6px;
+}

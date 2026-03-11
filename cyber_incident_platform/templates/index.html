@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CYBER INCIDENT MONITOR</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body {
+    background:#f4f6fb;
+}
+
+/* HEADER */
+header {
+    background:linear-gradient(135deg,#6a11cb,#9c27b0);
+    color:white;
+    padding:18px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    font-size:26px;
+    font-weight:600;
+}
+
+.logout-btn {
+    background:white;
+    color:#7b2cbf;
+    border:none;
+    padding:8px 18px;
+    border-radius:20px;
+    font-weight:500;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.logout-btn:hover {
+    background:#f1e7ff;
+}
+
+/* MAIN CONTAINER */
+.container {
+    padding:40px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:40px;
+}
+
+/* FLEX WRAPPER */
+.flex-row {
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+/* CARD */
+.card {
+    background:white;
+    width:280px;
+    padding:35px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    transition:0.35s;
+    border-top:4px solid #6a11cb;
+}
+
+.card:hover {
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}
+
+.card-icon {
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+.card h2 {
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+.card p {
+    color:#666;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+/* BUTTON */
+.card button {
+    background:linear-gradient(135deg,#6a11cb,#9c27b0);
+    border:none;
+    color:white;
+    padding:10px 25px;
+    border-radius:25px;
+    font-size:14px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card button:hover {
+    transform:scale(1.05);
+    box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* FOOTER */
+footer {
+    text-align:center;
+    margin-top:60px;
+    color:#777;
+    font-size:13px;
+}
+#chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-family: 'Poppins', sans-serif;
+}
+
+#chat-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg,#6a11cb,#9c27b0);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#chat-box {
+  display: none;
+  width: 300px;
+  max-height: 400px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#chat-header {
+  background: linear-gradient(135deg,#6a11cb,#9c27b0);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+}
+
+.chat-message {
+  margin-bottom: 8px;
+}
+
+.chat-message.user {
+  text-align: right;
+  color: #4b2cbf;
+}
+
+.chat-message.bot {
+  text-align: left;
+  color: #000;
+}
+
+#chat-form {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+}
+
+#chat-form button {
+  padding: 8px 15px;
+  background: linear-gradient(135deg,#6a11cb,#9c27b0);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+#chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.user-message {
+    text-align: right;
+    background: #007bff;
+    color: white;
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.bot-message {
+    text-align: left;
+    background: #f1f1f1;
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🛡 CYBER INCIDENT REPORTING AND MONITORING SYSTEM</h1>
+<a href="/logout">
+<button class="logout-btn">LOGOUT</button>
+</a>
+</header>
+
+<div class="container">
+
+  <!-- SUMMARY CARDS -->
+  <div class="flex-row">
+    <div class="card" style="border-top:4px solid #9c27b0; width:200px;">
+      <div class="card-icon">📊</div>
+      <h2>TOTAL INCIDENTS</h2>
+      <p style="font-size:20px; font-weight:bold;">{{ total_incidents }}</p>
+    </div>
+
+    <div class="card" style="border-top:4px solid #f44336; width:200px;">
+      <div class="card-icon">🚨</div>
+      <h2>OPEN INCIDENTS</h2>
+      <p style="font-size:20px; font-weight:bold; color:#f44336;">{{ open_incidents }}</p>
+    </div>
+
+    <div class="card" style="border-top:4px solid #4caf50; width:200px;">
+      <div class="card-icon">✅</div>
+      <h2>RESOLVED INCIDENTS</h2>
+      <p style="font-size:20px; font-weight:bold; color:#4caf50;">{{ resolved_incidents }}</p>
+    </div>
+  </div>
+
+  <!-- ACTION CARDS -->
+  <div class="flex-row">
+    <div class="card">
+      <div class="card-icon">🚨</div>
+      <h2>REPORT INCIDENTS</h2>
+      <p>Quickly report phishing attempts, malware infections, ransomware attacks, or any suspicious cyber activity to help keep the system secure.</p>
+      <a href="/report">
+        <button>REPORT NOW</button>
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h2>DASHBOARD</h2>
+      <p>Monitor reported incidents, track threat severity, and stay updated with the latest cybersecurity activities in real time.</p>
+      <a href="/dashboard">
+        <button>VIEW</button>
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🔐</div>
+      <h2>CYBER AWARENESS</h2>
+      <p>Learn how to identify phishing, malware and other cyber threats to stay safe in the digital world.</p>
+      <a href="/awareness">
+        <button>LEARN MORE</button>
+      </a>
+    </div>
+  </div>
+<!-- Chatbot floating widget -->
+<div id="chat-widget">
+  <div id="chat-icon">💬</div>
+  <div id="chat-box">
+    <div id="chat-header">CYBER BOT</div>
+    <div id="chat-messages"></div>
+    <form id="chat-form">
+      <input type="text" id="chat-input" placeholder="Ask me anything..." required>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</div>
+</div>
+
+<footer>
+© 2026 Cyber Incident Reporting Platform | Secure Reporting System
+</footer>
+
+<script>
+
+// CHAT OPEN / CLOSE
+const chatIcon = document.getElementById("chat-icon");
+const chatBox = document.getElementById("chat-box");
+
+chatIcon.addEventListener("click", () => {
+    if (chatBox.style.display === "none" || chatBox.style.display === "") {
+        chatBox.style.display = "flex";
+    } else {
+        chatBox.style.display = "none";
+    }
+});
+
+const chatForm = document.getElementById("chat-form");
+const chatInput = document.getElementById("chat-input");
+const chatMessages = document.getElementById("chat-messages");
+
+chatForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    // USER MESSAGE
+    const userMsg = document.createElement("div");
+    userMsg.className = "user-message";
+    userMsg.textContent = message;
+    chatMessages.appendChild(userMsg);
+
+    chatInput.value = "";
+
+    // AI typing indicator
+    const typingMsg = document.createElement("div");
+    typingMsg.className = "bot-message";
+    typingMsg.textContent = "AI is typing...";
+    chatMessages.appendChild(typingMsg);
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    try {
+        const response = await fetch("/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ message: message })
+        });
+
+        const data = await response.json();
+
+        setTimeout(() => {
+            typingMsg.textContent = data.reply;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 800);
+
+    } catch (error) {
+        console.error(error);
+        typingMsg.textContent = "Server error. Please try again.";
+    }
+});
+
+</script>
+</body>
+</html>
