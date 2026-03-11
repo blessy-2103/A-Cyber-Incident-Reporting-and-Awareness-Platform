@@ -60,7 +60,7 @@ Admin dashboard includes:
 
 ---
 
-# 📊 Dashboard Analytics
+#  Dashboard Analytics
 
 The admin dashboard displays visual security insights using **charts**.
 
