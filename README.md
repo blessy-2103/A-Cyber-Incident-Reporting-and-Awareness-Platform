@@ -1,5 +1,14 @@
 # 🛡 Cyber Incident Reporting and Awareness Platform
 
+![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-Web%20Framework-black?logo=flask)
+![SQLite](https://img.shields.io/badge/Database-SQLite-blue?logo=sqlite)
+![HTML](https://img.shields.io/badge/Frontend-HTML5-orange?logo=html5)
+![CSS](https://img.shields.io/badge/Style-CSS3-blue?logo=css3)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript)
+![Chart.js](https://img.shields.io/badge/Charts-Chart.js-ff6384?logo=chartdotjs)
+![License](https://img.shields.io/badge/License-Educational-green)
+
 A web-based cybersecurity platform that allows users to **report cyber incidents, track threats, and improve cybersecurity awareness**.  
 The system provides an **admin dashboard with analytics and monitoring tools** to help manage reported incidents effectively.
 
@@ -7,7 +16,7 @@ This project was built using **Python Flask, SQLite, HTML, CSS, JavaScript, and 
 
 ---
 
-# 📌 Project Overview
+#  Project Overview
 
 Cyber attacks such as phishing, malware, and ransomware are increasing rapidly. Many users do not know how to report incidents or understand cyber threats.
 
@@ -21,9 +30,9 @@ This platform provides:
 
 ---
 
-# ✨ Features
+#  Features
 
-## 👤 User Features
+##  User Features
 
 - User Registration and Login
 - Report Cyber Incidents
@@ -34,7 +43,7 @@ This platform provides:
 
 ---
 
-## 🛡 Admin Features
+##  Admin Features
 
 - Secure Admin Login
 - View All Reported Incidents
@@ -80,7 +89,7 @@ Charts are implemented using **Chart.js**.
 
 ---
 
-# 🤖 Cybersecurity Chatbot
+#  Cybersecurity Chatbot
 
 The platform includes a **basic chatbot assistant** that answers cybersecurity questions.
 
@@ -96,7 +105,7 @@ The chatbot provides **simple awareness guidance for common cyber threats**.
 
 ---
 
-# 🗄 Database Structure
+#  Database Structure
 
 The system uses **SQLite database**.
 
@@ -128,7 +137,7 @@ The system uses **SQLite database**.
 
 ---
 
-# 🛠 Technologies Used
+#  Technologies Used
 
 Backend:
 - Python
@@ -174,41 +183,31 @@ Cyber-Incident-Reporting-Platform
 
 ---
 
-# 📷 Screenshots
+#  Screenshots
 
-You can add screenshots in the **screenshots folder**.
+##  Login and Register page
 
-Example structure:
+<img width="1920" height="1080" alt="Screenshot (460)" src="https://github.com/user-attachments/assets/aa29a6e6-f429-4c77-bd27-8d98af7f77c3" />
+<img width="1920" height="1080" alt="Screenshot (461)" src="https://github.com/user-attachments/assets/fa3d440c-2277-43f3-857c-572f10678254" />
 
-```
-screenshots
-│
-├── login.png
-├── user_dashboard.png
-├── report_incident.png
-├── admin_dashboard.png
-├── chatbot.png
-```
 
 ---
 
-## Login Page
+## Home page
 
-![Login Page](screenshots/login.png)
+<img width="1920" height="1080" alt="Screenshot (462)" src="https://github.com/user-attachments/assets/64359690-3478-42da-89fb-9722ab60219b" />
+<img width="1920" height="1080" alt="Screenshot (463)" src="https://github.com/user-attachments/assets/cda45fa5-6ce6-4b05-b7b2-4a03f6f34ca8" />
 
----
-
-## User Dashboard
-
-![User Dashboard](screenshots/user_dashboard.png)
 
 ---
 
 ## Report Incident Page
 
-![Report Incident](screenshots/report_incident.png)
+<img width="1920" height="1080" alt="Screenshot (464)" src="https://github.com/user-attachments/assets/2255d8e1-8a24-4627-b70c-ba0a2fe3702c" />
+<img width="1920" height="1080" alt="Screenshot (465)" src="https://github.com/user-attachments/assets/a55fc05e-5bab-4af1-b93c-427777bb2b55" />
 
 ---
+
 
 ## Admin Dashboard
 
