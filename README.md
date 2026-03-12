@@ -27,7 +27,7 @@ This platform provides:
 - **Incident analytics and visualization**
 - **Cybersecurity awareness resources**
 - **Cybersecurity chatbot assistance**
-
+**Glassmorphism UI** 
 ---
 
 #  Features
@@ -187,49 +187,48 @@ Cyber-Incident-Reporting-Platform
 
 ##  Login and Register page
 
-<img width="1920" height="1080" alt="Screenshot (460)" src="https://github.com/user-attachments/assets/aa29a6e6-f429-4c77-bd27-8d98af7f77c3" />
-<img width="1920" height="1080" alt="Screenshot (461)" src="https://github.com/user-attachments/assets/fa3d440c-2277-43f3-857c-572f10678254" />
-
+<img width="1920" height="1080" alt="Screenshot (478)" src="https://github.com/user-attachments/assets/b9770de0-f3e8-4d10-b9a1-8bd5d94d6602" />
+<img width="1920" height="1080" alt="Screenshot (479)" src="https://github.com/user-attachments/assets/900708f9-ffe0-4d42-8fad-9e08f87837f0" />
 
 ---
 
 ## Home page
 
-<img width="1920" height="1080" alt="Screenshot (462)" src="https://github.com/user-attachments/assets/64359690-3478-42da-89fb-9722ab60219b" />
-<img width="1920" height="1080" alt="Screenshot (463)" src="https://github.com/user-attachments/assets/cda45fa5-6ce6-4b05-b7b2-4a03f6f34ca8" />
+<img width="1920" height="1080" alt="Screenshot (480)" src="https://github.com/user-attachments/assets/b62f6f79-f81b-4258-8100-49d7c5ee7e2d" />
+
 
 
 ---
 
 ## Report Incident Page
 
-<img width="1920" height="1080" alt="Screenshot (464)" src="https://github.com/user-attachments/assets/2255d8e1-8a24-4627-b70c-ba0a2fe3702c" />
-<img width="1920" height="1080" alt="Screenshot (465)" src="https://github.com/user-attachments/assets/a55fc05e-5bab-4af1-b93c-427777bb2b55" />
+<img width="1920" height="1080" alt="Screenshot (482)" src="https://github.com/user-attachments/assets/0ff273b7-d207-4451-9894-61e14e412e13" />
+<img width="1920" height="1080" alt="Screenshot (483)" src="https://github.com/user-attachments/assets/287e2bdf-c2c5-4f4b-baeb-85941ea345d2" />
 
 ---
 
 ## Incident Dashboard
 
-<img width="1920" height="1080" alt="Screenshot (466)" src="https://github.com/user-attachments/assets/3bdeaa78-cffd-49e7-8611-cf09446aa572" />
+<img width="1920" height="1080" alt="Screenshot (484)" src="https://github.com/user-attachments/assets/d7f7a2b2-bf2f-46d8-be3c-13674ace90a2" />
 
 ---
 ## Cyber Awareness Page
-<img width="1920" height="1080" alt="Screenshot (467)" src="https://github.com/user-attachments/assets/f5cbeaaf-c418-421c-87ef-46a59c83dbf4" />
-<img width="1920" height="1080" alt="Screenshot (468)" src="https://github.com/user-attachments/assets/3c18e27a-e1b1-46a7-8820-c2e63f90beb7" />
+<img width="1920" height="1080" alt="Screenshot (485)" src="https://github.com/user-attachments/assets/9e1300a7-c79a-4bcf-a99e-3c8b5a189b79" />
+<img width="1920" height="1080" alt="Screenshot (486)" src="https://github.com/user-attachments/assets/36ae30ed-28c4-46dd-a708-8b081a2fd32a" />
 
 ---
 
 ## Cybersecurity Chatbot
 
-<img width="1920" height="1080" alt="Screenshot (469)" src="https://github.com/user-attachments/assets/14db8b11-1c25-4be0-93c9-448abbc0ed11" />
+<img width="1920" height="1080" alt="Screenshot (481)" src="https://github.com/user-attachments/assets/b990099d-333d-4c03-90c1-cd4b72cff494" />
 
 
 ---
 
 ## Admin Dashboard
 
-<img width="1920" height="1080" alt="Screenshot (470)" src="https://github.com/user-attachments/assets/109d8650-2c9f-41fd-9d2e-59e3e72de685" />
-<img width="1920" height="1080" alt="Screenshot (471)" src="https://github.com/user-attachments/assets/8639f611-4fa0-42e1-90ea-14e716450434" />
+<img width="1920" height="1080" alt="Screenshot (487)" src="https://github.com/user-attachments/assets/cd8527be-cd78-438a-9959-1198ce2837da" />
+<img width="1920" height="1080" alt="Screenshot (488)" src="https://github.com/user-attachments/assets/4f634336-39ea-4ed5-b151-453dc8765906" />
 
 
 ---
