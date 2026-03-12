@@ -1,252 +1,292 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBERGUARD | Awareness Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --deep-purple: #2e1065;
+            --mid-purple: #6b21a8;
+            --bright-purple: #a855f7;
+            --glass-white: rgba(255, 255, 255, 0.95);
+            --text-dark: #1e1b4b;
+        }
 
-<title>Cyber Security Awareness</title>
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background-color: var(--deep-purple); 
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        /* --- SHARED BACKGROUND --- */
+        .bg-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6b21a8 100%);
+            z-index: -2;
+        }
 
-<style>
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: drift 15s infinite alternate ease-in-out;
+        }
+        .orb-1 { width: 500px; height: 500px; background: #9333ea; top: -10%; left: -10%; }
+        .orb-2 { width: 400px; height: 400px; background: #c084fc; bottom: -10%; right: -10%; animation-delay: -5s; }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+        @keyframes drift {
+            from { transform: translate(0, 0); }
+            to { transform: translate(40px, 40px); }
+        }
 
-body{
-background:#f4f6fb;
-}
+        /* --- HEADER --- */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky; top: 0; z-index: 100;
+        }
 
-/* HEADER */
+        header h1 {
+            color: white; font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
+            display: flex; align-items: center; gap: 12px;
+        }
 
-header{
-background:linear-gradient(135deg,#6a11cb,#9c27b0);
-color:white;
-padding:18px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+        .btn-home {
+            background: white; color: var(--mid-purple); border: none;
+            padding: 10px 24px; border-radius: 12px; font-weight: 700;
+            cursor: pointer; transition: 0.3s; text-decoration: none; font-size: 14px;
+        }
+        .btn-home:hover { background: var(--bright-purple); color: white; transform: translateY(-2px); }
 
-header h1{
-font-size:24px;
-}
+        /* --- CARDS CONTAINER --- */
+        .container {
+            padding: 50px 8%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
 
-.btn{
-background:white;
-color:#7b2cbf;
-border:none;
-padding:8px 18px;
-border-radius:20px;
-cursor:pointer;
-font-weight:500;
-}
+        .card {
+            background: var(--glass-white);
+            padding: 35px;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            flex-direction: column;
+        }
 
-.container{
-padding:40px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:25px;
-}
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
 
-/* CARDS */
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--mid-purple);
+            color: white;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 15px rgba(107, 33, 168, 0.2);
+        }
 
-.card{
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
-transition:0.3s;
-}
+        .card h2 {
+            color: var(--text-dark);
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
 
-.card:hover{
-transform:translateY(-5px);
-}
+        .card p {
+            color: #64748b;
+            line-height: 1.6;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
 
-.card h2{
-color:#7b2cbf;
-margin-bottom:10px;
-}
+        .card ul {
+            list-style: none;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 15px;
+        }
 
-.card p{
-line-height:1.6;
-margin-bottom:10px;
-}
+        .card li {
+            font-size: 14px;
+            color: #475569;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-weight: 500;
+        }
 
-ul{
-padding-left:20px;
-}
+        .card li::before {
+            content: "\f058";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--mid-purple);
+        }
 
-li{
-margin-bottom:8px;
-}
+        /* --- EMERGENCY PROTOCOL BOX --- */
+        .alert-container {
+            padding: 0 8% 60px 8%;
+        }
 
-/* ALERT BOX */
+        .alert {
+            background: #fff;
+            padding: 40px;
+            border-radius: 30px;
+            border-left: 10px solid #ef4444;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-.alert{
-background:#fff3cd;
-border:1px solid #ffeeba;
-padding:15px;
-border-radius:10px;
-margin:40px;
-}
+        .alert h3 {
+            color: #ef4444;
+            font-size: 24px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-.alert h3{
-color:#856404;
-margin-bottom:8px;
-}
+        .alert ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            list-style: none;
+        }
 
-</style>
+        .alert li {
+            background: #fef2f2;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: #991b1b;
+            font-size: 14px;
+            border: 1px solid #fee2e2;
+        }
 
+    </style>
 </head>
 
 <body>
 
-<header>
+    <div class="bg-canvas"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-<h1>🛡 CYBER SECURITY AWARENESS CENTER</h1>
+    <header>
+        <h1><i class="fas fa-shield-heart"></i> SECURITY AWARENESS CENTER</h1>
+        <a href="/" class="btn-home">BACK TO HOME</a>
+    </header>
 
-<div>
+    <div class="container">
 
-<a href="/">
-<button class="btn">HOME</button>
-</a>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-fish"></i></div>
+            <h2>Phishing Attacks</h2>
+            <p>Attackers impersonate trusted brands to trick you into clicking malicious links.</p>
+            <ul>
+                <li>Never click suspicious email or SMS links</li>
+                <li>Verify URLs before entering credentials</li>
+                <li>Check for spelling and domain errors</li>
+            </ul>
+        </div>
 
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-virus-slash"></i></div>
+            <h2>Malware Defense</h2>
+            <p>Software designed to steal data or lock systems via ransomware and trojans.</p>
+            <ul>
+                <li>Install software from trusted sources only</li>
+                <li>Use verified antivirus protection</li>
+                <li>Keep your OS and apps fully updated</li>
+            </ul>
+        </div>
 
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-key"></i></div>
+            <h2>Password Hygiene</h2>
+            <p>Your first line of defense is a strong, unique credential system.</p>
+            <ul>
+                <li>Minimum length: 12+ characters</li>
+                <li>Mix symbols, numbers, and cases</li>
+                <li>Enable Two-Factor Authentication (2FA)</li>
+            </ul>
+        </div>
 
-</div>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-user-secret"></i></div>
+            <h2>Social Engineering</h2>
+            <p>Psychological manipulation aimed at leaking confidential business data.</p>
+            <ul>
+                <li>Question urgent or threatening tones</li>
+                <li>Verify callers requesting sensitive info</li>
+                <li>Report suspicious messages immediately</li>
+            </ul>
+        </div>
 
-</header>
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-wifi"></i></div>
+            <h2>Public WiFi Risks</h2>
+            <p>Unsecured networks allow attackers to sniff and intercept your traffic.</p>
+            <ul>
+                <li>Avoid banking on airport or cafe WiFi</li>
+                <li>Always use a VPN for company access</li>
+                <li>Disable "Auto-Connect" on your devices</li>
+            </ul>
+        </div>
 
-<div class="container">
+        <div class="card">
+            <div class="card-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+            <h2>Data Resilience</h2>
+            <p>Protect your work from hardware failure or encryption-based attacks.</p>
+            <ul>
+                <li>Automate weekly data backups</li>
+                <li>Use encrypted cloud storage solutions</li>
+                <li>Test your recovery process monthly</li>
+            </ul>
+        </div>
 
-<!-- PHISHING -->
+    </div>
 
-<div class="card">
-
-<h2>PHISHING ATTACKS</h2>
-
-<p>Phishing is one of the most common cyber attacks where attackers impersonate trusted organizations to steal sensitive information.</p>
-
-<ul>
-<li>Never click suspicious email or SMS links</li>
-<li>Verify website URLs before entering credentials</li>
-<li>Do not share OTP, passwords, or bank details</li>
-<li>Check spelling errors and suspicious email addresses</li>
-</ul>
-
-</div>
-
-
-<!-- MALWARE -->
-
-<div class="card">
-
-<h2>MALWARE ATTACK</h2>
-
-<p>Malware includes viruses, ransomware, spyware, and trojans designed to damage systems or steal data.</p>
-
-<ul>
-<li>Install software only from trusted sources</li>
-<li>Use updated antivirus software</li>
-<li>Avoid downloading cracked or pirated software</li>
-<li>Keep operating systems and apps updated</li>
-</ul>
-
-</div>
-
-
-<!-- PASSWORD -->
-
-<div class="card">
-
-<h2>PASSWORD SECURITY</h2>
-
-<p>Weak passwords allow attackers to easily access personal and corporate accounts.</p>
-
-<ul>
-<li>Use strong passwords (12+ characters)</li>
-<li>Use uppercase, lowercase, numbers, and symbols</li>
-<li>Avoid using personal information in passwords</li>
-<li>Enable Two-Factor Authentication (2FA)</li>
-</ul>
-
-</div>
-
-
-<!-- SOCIAL ENGINEERING -->
-
-<div class="card">
-
-<h2>SOCIAL ENGINEERING</h2>
-
-<p>Attackers manipulate people psychologically to reveal confidential information.</p>
-
-<ul>
-<li>Be cautious of urgent or threatening messages</li>
-<li>Verify requests for sensitive data</li>
-<li>Do not trust unknown callers claiming to be IT staff</li>
-<li>Report suspicious communications immediately</li>
-</ul>
-
-</div>
-
-
-<!-- PUBLIC WIFI -->
-
-<div class="card">
-
-<h2>PUBLIC WIFI RISKS</h2>
-
-<p>Public WiFi networks can allow attackers to intercept your internet traffic.</p>
-
-<ul>
-<li>Avoid online banking on public WiFi</li>
-<li>Use a VPN when accessing sensitive information</li>
-<li>Disable automatic WiFi connections</li>
-<li>Always log out of accounts after use</li>
-</ul>
-
-</div>
-
-
-<!-- DATA BACKUP -->
-
-<div class="card">
-
-<h2>DATA BACKUP</h2>
-
-<p>Regular backups protect your data from ransomware or hardware failures.</p>
-
-<ul>
-<li>Backup important files weekly</li>
-<li>Use cloud storage or external drives</li>
-<li>Keep backup devices disconnected when not in use</li>
-<li>Test backups regularly</li>
-</ul>
-
-</div>
-
-</div>
-
-
-<div class="alert">
-
-<h3>⚠ What To Do If You Suspect a Cyber Attack</h3>
-
-<ul>
-<li>Disconnect the affected device from the internet</li>
-<li>Change passwords immediately</li>
-<li>Inform your IT or security team</li>
-<li>Scan the device with antivirus software</li>
-<li>Report the incident using the Incident Reporting page</li>
-</ul>
-
-</div>
+    <div class="alert-container">
+        <div class="alert">
+            <h3><i class="fas fa-triangle-exclamation"></i> Emergency Protocol: Suspected Breach</h3>
+            <ul>
+                <li>1. Disconnect device from Internet</li>
+                <li>2. Immediately change local passwords</li>
+                <li>3. Alert the CyberGuard IT Team</li>
+                <li>4. Run a full Antivirus Deep Scan</li>
+                <li>5. Log the event in the Reporting Page</li>
+            </ul>
+        </div>
+    </div>
 
 </body>
 </html>
-
