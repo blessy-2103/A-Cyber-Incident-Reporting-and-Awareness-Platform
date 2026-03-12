@@ -1,185 +1,231 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Report Cyber Incident</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Cyber Incident | Secure Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --deep-purple: #2e1065;
+            --mid-purple: #6b21a8;
+            --bright-purple: #a855f7;
+            --white: #ffffff;
+            --text-dark: #1e1b4b;
+            --text-muted: #64748b;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
-<style>
+        body {
+            background-color: var(--deep-purple);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+        /* --- ANIMATED PURPLE BACKGROUND --- */
+        .bg-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6b21a8 100%);
+            z-index: -2;
+        }
 
-body{
-background:#f4f6fb;
-}
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: drift 15s infinite alternate ease-in-out;
+        }
+        .orb-1 { width: 600px; height: 600px; background: #9333ea; top: -10%; left: -10%; }
+        .orb-2 { width: 400px; height: 400px; background: #c084fc; bottom: -10%; right: -10%; animation-delay: -5s; }
 
-/* HEADER */
+        @keyframes drift {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 50px); }
+        }
 
-header{
-background:linear-gradient(135deg,#6a11cb,#9c27b0);
-color:white;
-padding:18px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+        /* --- HEADER --- */
+        header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky; top: 0; z-index: 100;
+        }
 
-header h1{
-font-size:24px;
-}
+        header h1 {
+            color: white; font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
+            display: flex; align-items: center; gap: 10px;
+        }
 
-.home-btn{
-background:white;
-color:#7b2cbf;
-border:none;
-padding:8px 18px;
-border-radius:20px;
-cursor:pointer;
-}
+        .home-btn {
+            background: var(--white); color: var(--mid-purple); border: none;
+            padding: 10px 24px; border-radius: 12px; font-weight: 700;
+            cursor: pointer; transition: 0.3s; text-decoration: none; font-size: 14px;
+        }
+        .home-btn:hover { background: var(--bright-purple); color: white; transform: translateY(-2px); }
 
-/* FORM */
+        /* --- FORM LAYOUT --- */
+        .container {
+            display: flex; justify-content: center; padding: 60px 20px;
+        }
 
-.container{
-display:flex;
-justify-content:center;
-padding-top:40px;
-}
+        .form-card {
+            background: rgba(255, 255, 255, 0.98);
+            width: 100%; max-width: 600px;
+            padding: 45px;
+            border-radius: 30px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-.form-card{
-background:white;
-width:500px;
-padding:35px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
-}
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.form-card h2{
-text-align:center;
-margin-bottom:25px;
-color:#6a11cb;
-}
+        .form-card h2 {
+            text-align: center; margin-bottom: 10px; font-weight: 800;
+            color: var(--text-dark); letter-spacing: -1px; font-size: 28px;
+        }
 
-.input-group{
-margin-bottom:15px;
-}
+        .form-subtitle {
+            text-align: center; color: var(--text-muted); font-size: 14px;
+            margin-bottom: 35px; font-weight: 500;
+        }
 
-.input-group label{
-font-weight:500;
-font-size:14px;
-}
+        /* --- INPUT GROUPS --- */
+        .input-group { margin-bottom: 22px; }
 
-.input-group input,
-.input-group select,
-.input-group textarea{
-width:100%;
-padding:10px;
-margin-top:5px;
-border-radius:8px;
-border:1px solid #ccc;
-}
+        .input-group label {
+            display: block; font-weight: 700; font-size: 13px;
+            color: var(--text-dark); text-transform: uppercase;
+            letter-spacing: 0.5px; margin-bottom: 8px; margin-left: 5px;
+        }
 
-textarea{
-height:100px;
-resize:none;
-}
+        .input-group input, 
+        .input-group select, 
+        .input-group textarea {
+            width: 100%; padding: 14px 16px; border-radius: 14px;
+            border: 2px solid #f1f5f9; background: #f8fafc;
+            font-size: 15px; font-weight: 500; outline: none; transition: 0.3s;
+        }
 
-.submit-btn{
-width:100%;
-padding:12px;
-border:none;
-border-radius:25px;
-background:linear-gradient(135deg,#6a11cb,#9c27b0);
-color:white;
-font-size:15px;
-cursor:pointer;
-transition:0.3s;
-}
+        .input-group input:focus, 
+        .input-group select:focus, 
+        .input-group textarea:focus {
+            border-color: var(--mid-purple);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(107, 33, 168, 0.1);
+        }
 
-.submit-btn:hover{
-transform:scale(1.05);
-}
+        textarea { height: 120px; resize: none; }
 
-</style>
+        /* --- SUBMIT BUTTON --- */
+        .submit-btn {
+            width: 100%; padding: 16px; border: none; border-radius: 16px;
+            background: linear-gradient(135deg, var(--mid-purple), var(--bright-purple));
+            color: white; font-size: 16px; font-weight: 700;
+            cursor: pointer; transition: 0.4s; margin-top: 10px;
+            box-shadow: 0 10px 25px rgba(107, 33, 168, 0.3);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(107, 33, 168, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .submit-btn:active { transform: scale(0.98); }
+
+    </style>
 </head>
 
 <body>
 
+<div class="bg-canvas"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
 <header>
-
-<h1>CYBER INCIDENT REPORTING PORTAL</h1>
-
-<a href="/">
-<button class="home-btn">HOME</button>
-</a>
-
+    <h1><i class="fas fa-shield-virus"></i> CYBER INCIDENT PORTAL</h1>
+    <a href="/" class="home-btn">BACK TO HOME</a>
 </header>
 
 <div class="container">
 
-<div class="form-card">
+    <div class="form-card">
+        <h2>Report Incident</h2>
+        <p class="form-subtitle">Provide details below</p>
 
-<h2>SUBMIT INCIDENT REPORT</h2>
+        <form method="POST" action="/report">
 
-<form method="POST" action="/report">
+            <div class="input-group">
+                <label><i class="fas fa-list-ul"></i> Incident Type</label>
+                <select name="incident_type" required>
+                    <option value="" disabled selected>Select category...</option>
+                    <option>Phishing</option>
+                    <option>Malware</option>
+                    <option>Ransomware</option>
+                    <option>Data Breach</option>
+                    <option>Unauthorized Access</option>
+                    <option>Others</option>
+                </select>
+            </div>
 
-<div class="input-group">
-<label>INCIDENT TYPE</label>
-<select name="incident_type" required>
-<option value="">Select</option>
-<option>Phishing</option>
-<option>Malware</option>
-<option>Ransomware</option>
-<option>Data Breach</option>
-<option>Unauthorized Access</option>
-<option>Others</option>
-</select>
-</div>
+            <div class="input-group">
+                <label><i class="fas fa-heading"></i> Incident Title</label>
+                <input type="text" name="title" placeholder="Short summary of the event" required>
+            </div>
 
-<div class="input-group">
-<label>INCIDENT TITLE</label>
-<input type="text" name="title" required>
-</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="input-group">
+                    <label><i class="fas fa-calendar-day"></i> Date</label>
+                    <input type="date" name="incident_date" required>
+                </div>
 
-<div class="input-group">
-<label>DATE OF INCIDENT</label>
-<input type="date" name="incident_date" required>
-</div>
+                <div class="input-group">
+                    <label><i class="fas fa-bolt"></i> Severity Level</label>
+                    <select name="severity" required>
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
+                        <option>Critical</option>
+                    </select>
+                </div>
+            </div>
 
-<div class="input-group">
-<label>SEVERITY LEVEL</label>
-<select name="severity" required>
-<option>Low</option>
-<option>Medium</option>
-<option>High</option>
-<option>Critical</option>
-</select>
-</div>
+            <div class="input-group">
+                <label><i class="fas fa-laptop-code"></i> Affected System</label>
+                <input type="text" name="affected_system" placeholder="e.g. Server, HR-Laptop-04, Web-API">
+            </div>
 
-<div class="input-group">
-<label>AFFECTED SYSTEM</label>
-<input type="text" name="affected_system" placeholder="Server, Email, Laptop etc">
-</div>
+            <div class="input-group">
+                <label><i class="fas fa-user-edit"></i> Reporter Name</label>
+                <input type="text" name="reporter" placeholder="Your full name">
+            </div>
 
-<div class="input-group">
-<label>REPORTER NAME</label>
-<input type="text" name="reporter">
-</div>
+            <div class="input-group">
+                <label><i class="fas fa-align-left"></i> Full Description</label>
+                <textarea name="description" placeholder="Describe the incident in detail..." required></textarea>
+            </div>
 
-<div class="input-group">
-<label>DESCRIPTION</label>
-<textarea name="description" required></textarea>
-</div>
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> SUBMIT REPORT
+            </button>
 
-<button class="submit-btn">SUBMIT REPORT</button>
-
-</form>
-
-</div>
+        </form>
+    </div>
 
 </div>
 
