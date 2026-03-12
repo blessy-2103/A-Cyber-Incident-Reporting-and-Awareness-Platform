@@ -1,110 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBERGUARD | Live Monitor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --deep-purple: #2e1065;
+            --mid-purple: #6b21a8;
+            --bright-purple: #a855f7;
+            --glass-white: rgba(255, 255, 255, 0.95);
+            --text-dark: #1e1b4b;
+        }
 
-<meta charset="UTF-8">
-<title>Incident Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:#f4f6fb;}
-header{background:linear-gradient(135deg,#6a11cb,#9c27b0);color:white;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;}
-header h1{font-size:24px;}
-.header-buttons{display:flex;gap:10px;}
-.btn{background:white;color:#7b2cbf;border:none;padding:8px 18px;border-radius:20px;cursor:pointer;font-weight:500;transition:0.3s;}
-.btn:hover{background:#eee;}
-.container{padding:40px;}
-table{width:100%;border-collapse:collapse;background:white;border-radius:10px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.1);}
-th{background:#9c27b0;color:white;padding:12px;text-align:left;}
-td{padding:12px;border-bottom:1px solid #eee;}
-tr:hover{background:#f3e9ff;}
-.low{color:green;font-weight:bold;}
-.medium{color:orange;font-weight:bold;}
-.high{color:red;font-weight:bold;}
-.critical{color:darkred;font-weight:bold;}
-.success-message{background:#d4edda;color:#155724;padding:12px;margin-bottom:20px;border-radius:8px;border:1px solid #c3e6cb;font-weight:500;}
- .search-container {
-    display: flex;
-    justify-content: flex-end;  /* moves search to the right */
-    margin-bottom: 20px;
-}
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background-color: var(--deep-purple); 
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-.search-container form input {
-    padding: 8px;
-    width: 250px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
+        /* --- SHARED BACKGROUND --- */
+        .bg-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6b21a8 100%);
+            z-index: -2;
+        }
 
-.search-container form button {
-    padding: 8px 15px;
-    border: none;
-    background: #7b2cbf;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: drift 15s infinite alternate ease-in-out;
+        }
+        .orb-1 { width: 500px; height: 500px; background: #9333ea; top: -10%; left: -10%; }
+        .orb-2 { width: 400px; height: 400px; background: #c084fc; bottom: -10%; right: -10%; animation-delay: -5s; }
 
+        @keyframes drift {
+            from { transform: translate(0, 0); }
+            to { transform: translate(40px, 40px); }
+        }
 
+        /* --- HEADER --- */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky; top: 0; z-index: 100;
+        }
 
-</style>
-</style>
+        header h1 {
+            color: white; font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .btn-home {
+            background: white; color: var(--mid-purple); border: none;
+            padding: 10px 24px; border-radius: 12px; font-weight: 700;
+            cursor: pointer; transition: 0.3s; text-decoration: none; font-size: 14px;
+        }
+        .btn-home:hover { background: var(--bright-purple); color: white; transform: translateY(-2px); }
+
+        /* --- CONTAINER --- */
+        .container { padding: 40px 5%; }
+
+        .success-message {
+            background: #dcfce7; color: #166534; padding: 15px 25px;
+            margin-bottom: 25px; border-radius: 14px; border: 1px solid #bbf7d0;
+            font-weight: 600; animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown { from { opacity:0; transform: translateY(-10px); } to { opacity:1; transform: translateY(0); } }
+
+        /* --- SEARCH BAR --- */
+        .search-container {
+            display: flex; justify-content: flex-end; margin-bottom: 30px;
+        }
+
+        .search-container form {
+            display: flex; gap: 10px; background: var(--glass-white);
+            padding: 8px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .search-container input {
+            padding: 12px 15px; width: 300px; border: 1px solid #e2e8f0;
+            border-radius: 10px; outline: none; font-weight: 500;
+        }
+
+        .search-container button {
+            padding: 0 25px; background: var(--mid-purple); color: white;
+            border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s;
+        }
+        .search-container button:hover { background: var(--bright-purple); }
+
+        /* --- DATA TABLE --- */
+        .table-wrapper {
+            background: var(--glass-white); border-radius: 24px;
+            overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+
+        th {
+            background: #f8fafc; color: #64748b; padding: 18px 20px;
+            font-size: 12px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; border-bottom: 2px solid #f1f5f9;
+        }
+
+        td {
+            padding: 18px 20px; color: var(--text-dark); font-size: 14px;
+            font-weight: 500; border-bottom: 1px solid #f1f5f9;
+        }
+
+        tr:hover { background: #fcfaff; }
+
+        /* --- SEVERITY BADGES --- */
+        .severity {
+            padding: 6px 12px; border-radius: 8px; font-size: 11px;
+            font-weight: 800; text-transform: uppercase; display: inline-block;
+        }
+        .low { background: #dcfce7; color: #166534; }
+        .medium { background: #fef9c3; color: #854d0e; }
+        .high { background: #ffedd5; color: #9a3412; }
+        .critical { background: #fee2e2; color: #991b1b; }
+
+        /* --- STATUS BADGE --- */
+        .status-pill {
+            font-size: 12px; font-weight: 600; color: var(--mid-purple);
+            background: rgba(107, 33, 168, 0.1); padding: 4px 10px; border-radius: 20px;
+        }
+
+    </style>
 </head>
 
 <body>
-<header>
-<h1>INCIDENT DASHBOARD</h1>
-<div class="header-buttons">
-<a href="/"><button class="btn">HOME</button></a>
 
-</div>
+<div class="bg-canvas"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<header>
+    <h1><i class="fas fa-microchip"></i> INCIDENT COMMAND DASHBOARD</h1>
+    <div class="header-buttons">
+        <a href="/" class="btn-home">BACK TO HOME</a>
+    </div>
 </header>
 
 <div class="container">
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<div class="success-message">
-{{ messages[0] }}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="success-message">
+        <i class="fas fa-check-circle"></i> {{ messages[0] }}
+    </div>
+    {% endif %}
+    {% endwith %}
 
+    <div class="search-container">
+        <form method="POST">
+            <input type="text" name="search" placeholder="Search by ID, title or system..." value="{{ search_term }}">
+            <button type="submit"><i class="fas fa-search"></i> SEARCH</button>
+        </form>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Incident Title</th>
+                    <th>Timestamp</th>
+                    <th>Severity</th>
+                    <th>System</th>
+                    <th>Reporter</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for incident in incidents %}
+                <tr>
+                    <td style="color: var(--mid-purple); font-weight: 800;">#{{ incident[0] }}</td>
+                    <td><i class="fas fa-tag" style="opacity: 0.5;"></i> {{ incident[1] }}</td>
+                    <td style="font-weight: 700;">{{ incident[2] }}</td>
+                    <td style="color: #64748b; font-size: 13px;">{{ incident[3] }}</td>
+                    <td>
+                        <span class="severity {{ incident[4]|lower }}">
+                            {{ incident[4] }}
+                        </span>
+                    </td>
+                    <td><code>{{ incident[5] }}</code></td>
+                    <td>{{ incident[6] }}</td>
+                    <td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #64748b;">
+                        {{ incident[7] }}
+                    </td>
+                    <td><span class="status-pill">{{ incident[8] }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-{% endif %}
-{% endwith %}
 
-<div class="search-container" style="display:flex; justify-content:flex-end; margin-bottom:20px;">
-    <form method="POST">
-        <input type="text" name="search" placeholder="Search incidents..." value="{{ search_term }}">
-        <button type="submit">SEARCH</button>
-    </form>
-</div>
-
-<table>
-<tr>
-<th>ID</th>
-<th>TYPE</th>
-<th>TITLE</th>
-<th>DATE</th>
-<th>SEVERITY</th>
-<th>AFFECTED SYSTEM</th>
-<th>REPORTED</th>
-<th>DESCRIPTION</th>
-<th>STATUS</th> <!-- Added Status column -->
-</tr>
-
-{% for incident in incidents %}
-<tr>
-<td>{{ incident[0] }}</td>
-<td>{{ incident[1] }}</td>
-<td>{{ incident[2] }}</td>
-<td>{{ incident[3] }}</td>
-<td class="{{ incident[4]|lower }}">{{ incident[4] }}</td>
-<td>{{ incident[5] }}</td>
-<td>{{ incident[6] }}</td>
-<td>{{ incident[7] }}</td>
-<td>{{ incident[8] }}</td> <!-- Display status -->
-</tr>
-{% endfor %}
-</table>
-</div>
 </body>
 </html>
