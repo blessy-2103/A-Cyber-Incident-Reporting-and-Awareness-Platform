@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash, jsonify
 import sqlite3
 import os
-import re
 from werkzeug.utils import secure_filename
 
 DATABASE = os.path.join(os.getcwd(), "database.db")
@@ -40,10 +39,13 @@ def init_db():
     )
     """)
     
-    cursor.execute("INSERT OR IGNORE INTO scam_alerts(title, description) VALUES (?, ?)", 
-               ("New Netflix Phishing Link", "Users are receiving emails asking to 'Update Payment' via a fake netflix-verify.xyz link."))
+    # Insert dummy data if empty
+    cursor.execute("SELECT COUNT(*) FROM scam_alerts")
+    if cursor.fetchone()[0] == 0:
+        cursor.execute("INSERT INTO scam_alerts(title, description) VALUES (?, ?)", 
+                   ("New Netflix Phishing Link", "Users are receiving emails asking to 'Update Payment' via a fake netflix-verify.xyz link."))
 
-    # Incidents table - UPDATED with evidence_path and is_anonymous
+    # Incidents table
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS incidents(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,10 +63,8 @@ def init_db():
     """)
 
     # Default admin
-    cursor.execute("""
-    INSERT OR IGNORE INTO users(name,email,password,role)
-    VALUES('Admin','admin@gmail.com','admin123','admin')
-    """)
+    cursor.execute("INSERT OR IGNORE INTO users(name, email, password, role) VALUES(?,?,?,?)",
+                  ('Admin', 'admin@gmail.com', 'admin123', 'admin'))
 
     conn.commit()
     conn.close()
@@ -97,12 +97,12 @@ def login():
         password = request.form["password"]
         conn = sqlite3.connect(DATABASE)
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM users WHERE email=? AND password=?", (email,password))
+        cursor.execute("SELECT * FROM users WHERE email=? AND password=?", (email, password))
         user = cursor.fetchone()
         conn.close()
         if user:
-            session["user"] = user[2]
-            session["role"] = user[4]
+            session["user"] = user[2] # Email
+            session["role"] = user[4] # Role
             return redirect("/admin_dashboard") if user[4] == "admin" else redirect("/")
         flash("Invalid Credentials")
     return render_template("login.html")
@@ -116,7 +116,7 @@ def register():
         try:
             conn = sqlite3.connect(DATABASE)
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO users(name,email,password) VALUES(?,?,?)", (name,email,password))
+            cursor.execute("INSERT INTO users(name, email, password) VALUES(?,?,?)", (name, email, password))
             conn.commit()
             conn.close()
             flash("Registration Successful!")
@@ -125,7 +125,17 @@ def register():
             flash("Email already exists!")
     return render_template("register.html")
 
-# --- COMBINED REPORT ROUTE ---
+@app.route("/awareness")
+def awareness():
+    if "user" not in session:
+        return redirect("/login")
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM scam_alerts ORDER BY date_posted DESC")
+    alerts = cursor.fetchall()
+    conn.close()
+    return render_template("awareness.html", alerts=alerts)
+
 @app.route("/report", methods=["GET","POST"])
 def report():
     if "user" not in session:
@@ -139,11 +149,9 @@ def report():
         affected_system = request.form.get("affected_system")
         description = request.form.get("description")
         
-        # Handle Anonymous Toggle
         is_anon = 1 if request.form.get("anonymous") == "on" else 0
-        reporter = "Anonymous" if is_anon else request.form.get("reporter")
+        reporter = "Anonymous" if is_anon else session.get("user")
 
-        # Handle File Upload
         file = request.files.get("evidence")
         filename = None
         if file and file.filename != '':
@@ -159,7 +167,7 @@ def report():
         conn.commit()
         conn.close()
 
-        flash("Incident Report Submitted Successfully!")
+        flash("Incident Report Submitted!")
         return redirect("/dashboard")
         
     return render_template("report.html")
@@ -179,29 +187,27 @@ def dashboard():
     conn.close()
     return render_template("dashboard.html", incidents=incidents, search_term=search_term)
 
-@app.route("/admin_dashboard", methods=["GET","POST"])
+@app.route("/admin_dashboard")
 def admin_dashboard():
     if "user" not in session or session.get("role") != "admin":
         return redirect("/login")
-    
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM incidents")
     incidents = cursor.fetchall()
-    
-    # Statistics logic (simplified for brevity)
-    cursor.execute("SELECT severity, COUNT(*) FROM incidents GROUP BY severity")
-    severity_counts = {row[0]: row[1] for row in cursor.fetchall()}
-    
     conn.close()
-    return render_template("admin_dashboard.html", incidents=incidents, severity_counts=severity_counts)
+    return render_template("admin_dashboard.html", incidents=incidents)
 
-@app.route("/chat", methods=["POST"])
-def chat():
+@app.route("/api/detect_phishing", methods=["POST"])
+def detect_phishing():
     data = request.get_json()
-    user_msg = data.get("message", "").lower().strip()
-    # ... (Your existing chatbot logic) ...
-    return jsonify({"reply": "I am your security assistant. How can I help?"})
+    content = data.get("content", "").lower()
+    # Simple Heuristic Analysis
+    if any(word in content for word in ["verify", "update", "urgent", ".xyz", ".bit"]):
+        analysis = "⚠️ MALICIOUS: This content matches common phishing patterns."
+    else:
+        analysis = "✅ SAFE: No obvious phishing indicators detected."
+    return jsonify({"analysis": analysis})
 
 @app.route("/logout")
 def logout():
