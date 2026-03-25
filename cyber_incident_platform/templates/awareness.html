@@ -14,6 +14,7 @@
             --bright-purple: #a855f7;
             --glass-white: rgba(255, 255, 255, 0.95);
             --text-dark: #1e1b4b;
+            --neon-green: #00ff88;
         }
 
         * { margin:0; padding:0; box-sizing:border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -62,7 +63,7 @@
         }
 
         header h1 {
-            color: white; font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
+            color: white; font-size: 20px; font-weight: 800;
             display: flex; align-items: center; gap: 12px;
         }
 
@@ -73,9 +74,53 @@
         }
         .btn-home:hover { background: var(--bright-purple); color: white; transform: translateY(-2px); }
 
+        /* --- AI SCANNER (Integrated into Theme) --- */
+        .scanner-section {
+            padding: 40px 8% 0 8%;
+        }
+
+        .scanner-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 28px;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .scanner-box { display: flex; gap: 15px; margin-top: 15px; }
+
+        textarea {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            color: white;
+            outline: none; resize: none;
+        }
+
+        .btn-scan {
+            background: var(--neon-green);
+            color: var(--deep-purple);
+            border: none;
+            padding: 0 30px;
+            border-radius: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #scanResult {
+            margin-top: 15px; padding: 15px; border-radius: 12px;
+            display: none; background: rgba(255,255,255,0.05);
+            border-left: 5px solid var(--neon-green);
+        }
+
         /* --- CARDS CONTAINER --- */
         .container {
-            padding: 50px 8%;
+            padding: 40px 8%;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
@@ -88,108 +133,33 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255,255,255,0.3);
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
 
         .card-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--mid-purple);
-            color: white;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 15px rgba(107, 33, 168, 0.2);
+            width: 50px; height: 50px; background: var(--mid-purple); color: white;
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-size: 22px; margin-bottom: 20px;
         }
 
-        .card h2 {
-            color: var(--text-dark);
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-
-        .card p {
-            color: #64748b;
-            line-height: 1.6;
-            font-size: 15px;
-            margin-bottom: 20px;
-        }
-
-        .card ul {
-            list-style: none;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 15px;
-        }
-
-        .card li {
-            font-size: 14px;
-            color: #475569;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-weight: 500;
-        }
-
-        .card li::before {
-            content: "\f058";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            color: var(--mid-purple);
-        }
+        .card h2 { color: var(--text-dark); font-size: 22px; font-weight: 800; margin-bottom: 12px; }
+        .card p { color: #64748b; line-height: 1.6; font-size: 15px; margin-bottom: 20px; }
+        .card ul { list-style: none; border-top: 1px solid #f1f5f9; padding-top: 15px; }
+        .card li { font-size: 14px; color: #475569; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; font-weight: 500; }
+        .card li::before { content: "\f058"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: var(--mid-purple); }
 
         /* --- EMERGENCY PROTOCOL BOX --- */
-        .alert-container {
-            padding: 0 8% 60px 8%;
-        }
-
+        .alert-container { padding: 0 8% 60px 8%; }
         .alert {
-            background: #fff;
-            padding: 40px;
-            border-radius: 30px;
-            border-left: 10px solid #ef4444;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            background: #fff; padding: 40px; border-radius: 30px;
+            border-left: 10px solid #ef4444; box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            display: flex; flex-direction: column; gap: 20px;
         }
-
-        .alert h3 {
-            color: #ef4444;
-            font-size: 24px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .alert ul {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            list-style: none;
-        }
-
-        .alert li {
-            background: #fef2f2;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: 600;
-            color: #991b1b;
-            font-size: 14px;
-            border: 1px solid #fee2e2;
-        }
+        .alert h3 { color: #ef4444; font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 15px; }
+        .alert ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; list-style: none; }
+        .alert li { background: #fef2f2; padding: 15px; border-radius: 12px; font-weight: 600; color: #991b1b; font-size: 14px; border: 1px solid #fee2e2; }
 
     </style>
 </head>
@@ -204,6 +174,34 @@
         <h1><i class="fas fa-shield-heart"></i> SECURITY AWARENESS CENTER</h1>
         <a href="/" class="btn-home">BACK TO HOME</a>
     </header>
+
+    <div class="scanner-section">
+        <div class="scanner-card">
+            <h2 style="color: var(--neon-green); font-size: 24px;"><i class="fas fa-robot"></i> AI Phishing & Link Analyzer</h2>
+            <p style="font-size: 14px; opacity: 0.9;">Analyze suspicious text or URLs using real-time machine learning heuristics.</p>
+            <div class="scanner-box">
+                <textarea id="scanInput" rows="2" placeholder="Paste link or suspicious email snippet here..."></textarea>
+                <button class="btn-scan" onclick="analyzeThreat()">SCAN CONTENT</button>
+            </div>
+            <div id="scanResult">
+                <p id="resultBody" style="font-size: 14px;"></p>
+            </div>
+        </div>
+    </div>
+    <div class="alert-container" style="padding-top: 20px; padding-bottom: 20px;">
+    <div class="card" style="flex-direction: row; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #6b21a8, #4c1d95); border: none; padding: 25px 40px;">
+        <div style="display: flex; align-items: center; gap: 25px;">
+            <div class="card-icon" style="background: var(--neon-green); color: var(--deep-purple); margin-bottom: 0; box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div>
+                <h2 style="color: white; margin-bottom: 4px; font-size: 20px;">Ready for the Shield Check?</h2>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 0; font-size: 14px;">Test your threat detection skills in our real-time simulation.</p>
+            </div>
+        </div>
+        <a href="/quiz" class="btn-scan" style="text-decoration: none; display: flex; align-items: center; height: 50px; padding: 0 35px;">START QUIZ</a>
+    </div>
+</div>
 
     <div class="container">
 
@@ -288,5 +286,30 @@
         </div>
     </div>
 
+    <script>
+        async function analyzeThreat() {
+            const input = document.getElementById('scanInput').value;
+            const resultBox = document.getElementById('scanResult');
+            const resultBody = document.getElementById('resultBody');
+
+            if (!input) return alert("Please enter content to scan.");
+
+            resultBox.style.display = "block";
+            resultBody.innerText = "Heuristic scan in progress...";
+
+            try {
+                const response = await fetch('/api/detect_phishing', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ content: input })
+                });
+                const data = await response.json();
+                resultBody.innerText = data.analysis;
+                resultBox.style.borderLeftColor = data.analysis.toUpperCase().includes("MALICIOUS") ? "#ef4444" : "#00ff88";
+            } catch (e) {
+                resultBody.innerText = "AI Service unreachable.";
+            }
+        }
+    </script>
 </body>
 </html>
