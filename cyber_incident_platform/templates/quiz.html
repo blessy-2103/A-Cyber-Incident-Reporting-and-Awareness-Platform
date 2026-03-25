@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIELD CHECK | CyberGuard Simulation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --deep-purple: #2e1065;
+            --mid-purple: #6b21a8;
+            --bright-purple: #a855f7;
+            --neon-green: #00ff88;
+            --danger-red: #ef4444;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background-color: var(--deep-purple); 
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- SHARED BACKGROUND --- */
+        .bg-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #2e1065 0%, #4c1d95 50%, #6b21a8 100%);
+            z-index: -2;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: drift 15s infinite alternate ease-in-out;
+        }
+        .orb-1 { width: 500px; height: 500px; background: #9333ea; top: -10%; left: -10%; }
+
+        @keyframes drift {
+            from { transform: translate(0, 0); }
+            to { transform: translate(40px, 40px); }
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .quiz-wrapper {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .q-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            display: none;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .q-card.active { display: block; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .option-btn {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 16px;
+            color: white;
+            text-align: left;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--neon-green);
+            transform: scale(1.01);
+        }
+
+        .option-btn:disabled { cursor: default; opacity: 0.8; }
+
+        .feedback-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            display: none;
+            font-weight: 600;
+            line-height: 1.5;
+            border-left: 5px solid transparent;
+        }
+
+        .btn-next {
+            background: var(--neon-green);
+            color: var(--deep-purple);
+            border: none;
+            padding: 14px 35px;
+            border-radius: 12px;
+            font-weight: 800;
+            margin-top: 25px;
+            cursor: pointer;
+            float: right;
+            display: none;
+            transition: 0.3s;
+        }
+
+        .btn-next:hover { opacity: 0.9; box-shadow: 0 0 20px rgba(0, 255, 136, 0.4); }
+
+        .results-screen { text-align: center; }
+        .trophy-icon { font-size: 60px; color: var(--neon-green); margin-bottom: 20px; }
+
+    </style>
+</head>
+
+<body>
+    <div class="bg-canvas"></div>
+    <div class="orb orb-1"></div>
+
+    <header>
+        <h1 style="font-size: 18px;"><i class="fas fa-user-ninja"></i> SHIELD CHECK</h1>
+        <a href="/awareness" style="color: white; text-decoration: none; font-weight: 700; font-size: 14px;">ABANDON MISSION</a>
+    </header>
+
+    <div class="quiz-wrapper">
+        
+        {% for scenario in scenarios %}
+        {# We save the loop index here to avoid the loop.parent error #}
+        {% set q_num = loop.index %}
+        
+        <div class="q-card {% if loop.first %}active{% endif %}" id="card-{{ q_num }}">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <span style="color: var(--neon-green); font-weight: 800; font-size: 12px; text-transform: uppercase;">Threat Level: Critical</span>
+                <span style="opacity: 0.6; font-size: 12px;">Scenario {{ q_num }} of {{ scenarios|length }}</span>
+            </div>
+            
+            <h2 style="font-size: 22px; line-height: 1.4; margin-bottom: 10px;">{{ scenario.question }}</h2>
+            
+            <div class="option-list" style="margin-top: 25px;">
+                {% for option in scenario.options %}
+                <button class="option-btn" 
+                        onclick="handleSelection('{{ q_num }}', {{ loop.index0 }}, {{ scenario.correct }}, '{{ scenario.explanation | replace("'", "\\'") }}')">
+                    {{ option }}
+                </button>
+                {% endfor %}
+            </div>
+
+            <div id="feedback-{{ q_num }}" class="feedback-box"></div>
+            
+            <button id="next-{{ q_num }}" class="btn-next" onclick="goToNext('{{ q_num }}')">
+                CONTINUE <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+            </button>
+            <div style="clear: both;"></div>
+        </div>
+        {% endfor %}
+
+        <div id="card-results" class="q-card results-screen">
+            <i class="fas fa-trophy trophy-icon"></i>
+            <h2 style="font-size: 28px;">Mission Debrief Complete</h2>
+            <p id="final-score" style="font-size: 18px; margin: 15px 0; opacity: 0.8;"></p>
+            <p style="font-size: 14px; margin-bottom: 30px; color: #94a3b8;">Your security performance has been evaluated.</p>
+            <a href="/awareness" class="option-btn" style="display: block; text-decoration: none; text-align: center; background: var(--neon-green); color: var(--deep-purple); font-weight: 800;">RETURN TO COMMAND CENTER</a>
+        </div>
+
+    </div>
+
+    <script>
+        let correctCount = 0;
+        const totalQuestions = {{ scenarios|length }};
+
+        function handleSelection(currentIndex, selectedIdx, correctIdx, explanation) {
+            const feedback = document.getElementById(`feedback-${currentIndex}`);
+            const nextBtn = document.getElementById(`next-${currentIndex}`);
+            const allButtons = document.querySelectorAll(`#card-${currentIndex} .option-btn`);
+
+            // Disable all options for this question
+            allButtons.forEach(btn => btn.disabled = true);
+
+            feedback.style.display = "block";
+            
+            if (selectedIdx === correctIdx) {
+                correctCount++;
+                feedback.style.backgroundColor = "rgba(0, 255, 136, 0.1)";
+                feedback.style.color = "#00ff88";
+                feedback.style.borderLeftColor = "#00ff88";
+                feedback.innerHTML = `<i class="fas fa-check-circle"></i> <strong>Threat Neutralized!</strong><br>${explanation}`;
+            } else {
+                feedback.style.backgroundColor = "rgba(239, 68, 68, 0.1)";
+                feedback.style.color = "#ef4444";
+                feedback.style.borderLeftColor = "#ef4444";
+                feedback.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <strong>System Compromised!</strong><br>${explanation}`;
+            }
+
+            nextBtn.style.display = "block";
+        }
+
+        function goToNext(currentIndex) {
+            document.getElementById(`card-${currentIndex}`).classList.remove('active');
+            
+            const nextIndex = parseInt(currentIndex) + 1;
+            const nextCard = document.getElementById(`card-${nextIndex}`);
+
+            if (nextCard) {
+                nextCard.classList.add('active');
+            } else {
+                const resultsCard = document.getElementById('card-results');
+                resultsCard.classList.add('active');
+                document.getElementById('final-score').innerText = `Security Rating: ${correctCount} / ${totalQuestions} Threats Spotted`;
+            }
+        }
+    </script>
+</body>
+</html>
