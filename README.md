@@ -213,8 +213,10 @@ Cyber-Incident-Reporting-Platform
 
 ---
 ## Cyber Awareness Page
-<img width="1920" height="1080" alt="Screenshot (485)" src="https://github.com/user-attachments/assets/9e1300a7-c79a-4bcf-a99e-3c8b5a189b79" />
-<img width="1920" height="1080" alt="Screenshot (486)" src="https://github.com/user-attachments/assets/36ae30ed-28c4-46dd-a708-8b081a2fd32a" />
+<img width="1920" height="1080" alt="Screenshot (962)" src="https://github.com/user-attachments/assets/f513633a-8517-4dfb-806e-0a9672c68ba7" />
+<img width="1920" height="1080" alt="Screenshot (963)" src="https://github.com/user-attachments/assets/89b85928-3abc-4814-85f7-fd6d6c35f7c2" />
+<img width="1920" height="1080" alt="Screenshot (964)" src="https://github.com/user-attachments/assets/745a22b9-6a9d-437c-8b9e-f8b3f9e88a05" />
+<img width="1920" height="1080" alt="Screenshot (965)" src="https://github.com/user-attachments/assets/a8077f95-42b1-41eb-9bf5-e2809db472e0" />
 
 ---
 
