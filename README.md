@@ -202,8 +202,8 @@ Cyber-Incident-Reporting-Platform
 
 ## Report Incident Page
 
-<img width="1920" height="1080" alt="Screenshot (482)" src="https://github.com/user-attachments/assets/0ff273b7-d207-4451-9894-61e14e412e13" />
-<img width="1920" height="1080" alt="Screenshot (483)" src="https://github.com/user-attachments/assets/287e2bdf-c2c5-4f4b-baeb-85941ea345d2" />
+<img width="1920" height="1080" alt="Screenshot (960)" src="https://github.com/user-attachments/assets/585fffcf-27eb-434f-917f-d45498597326" />
+<img width="1920" height="1080" alt="Screenshot (961)" src="https://github.com/user-attachments/assets/d238338b-1dba-48e0-8c5d-e05fc6ee3f6f" />
 
 ---
 
